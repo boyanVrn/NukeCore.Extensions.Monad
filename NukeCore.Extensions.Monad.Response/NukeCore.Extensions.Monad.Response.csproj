@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.9</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Boyko Andrey</Authors>
+    <Company>Boyko Andrey</Company>
+    <Product>NukeCore.Extensions.Monad</Product>
+    <Description>Resolve monad pattern for response</Description>
   </PropertyGroup>
+
+  <Target Name="PostBuildRelease" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="dotnet nuget push -k oy2asue4d2ea2i52fatql7e6nuxqtewubntd675swxj2k4 -s https://api.nuget.org/v3/index.json &quot;$(TargetDir)..\$(PackageId).$(PackageVersion).nupkg&quot;" IgnoreExitCode="true" />
+  </Target>
 
 </Project>
