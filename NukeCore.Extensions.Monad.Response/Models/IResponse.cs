@@ -2,5 +2,7 @@
 
 namespace NukeCore.Extensions.Monad.Response.Models
 {
-    public interface IResponse<out TData> : IData<TData>, IError<IFail>, ISuccess { }
+    public interface IResponse : IError<IFail>, ISuccess { }
+
+    public interface IResponse<out TData> : IResponse, IData<TData> { }
 }

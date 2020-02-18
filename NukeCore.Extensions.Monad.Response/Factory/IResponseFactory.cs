@@ -5,8 +5,12 @@ namespace NukeCore.Extensions.Monad.Response.Factory
 {
     public interface IResponseFactory
     {
-        ResponseBase<TData> CreateSuccess<TData>(TData data);
-        ResponseBase<TData> CreateFault<TData>(IFail error);
-        ResponseBase<TData> CreateInstance<TData>(TData data, IFail error);
+        IResponse<TData> CreateSuccess<TData>(TData data);
+        IResponse<TData> CreateFault<TData>(IFail error);
+
+        ResponseBase CreateSuccess();
+        ResponseBase CreateFault(IFail error);
+
+        IResponse<TData> CreateInstance<TData>(TData data, IFail error);
     }
 }

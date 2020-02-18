@@ -3,7 +3,7 @@
 namespace NukeCore.Extensions.Monad.Response.Models
 {
 
-    public class ResponseBase<TData> : IResponse<TData>
+    public class ResponseBase : IResponse
     {
         private IFail _error;
 
@@ -17,26 +17,41 @@ namespace NukeCore.Extensions.Monad.Response.Models
             }
         }
 
-        public TData Data { get; }
+        public object Data { get; }
 
         public bool IsSuccess { get; private set; }
+        protected virtual bool IsOkError(IFail error) => error == null;
 
         public ResponseBase(IFail error)
         {
             IsSuccess = false;
             _error = error;
         }
+
+        public ResponseBase()
+        {
+            IsSuccess = true;
+            Data = new object();
+        }
+    }
+
+    public class ResponseBase<TData> : ResponseBase, IResponse<TData>
+    {
+        public new TData Data { get; }
+
+        public ResponseBase(IFail error) : base(error) { }
+
         public ResponseBase(TData data)
         {
             Data = data;
-            IsSuccess = true;
-        }
-        public ResponseBase(TData data, IFail error)
-        {
-            Data = data;
-            Error = error;
         }
 
-        protected virtual bool IsOkError(IFail error) => error == null;
+        public ResponseBase(TData data, IFail error): base(error)
+        {
+            Data = data;
+        }
+
     }
+
+
 }
