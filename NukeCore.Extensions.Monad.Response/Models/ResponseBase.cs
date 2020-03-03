@@ -31,7 +31,7 @@ namespace NukeCore.Extensions.Monad.Response.Models
         public ResponseBase()
         {
             IsSuccess = true;
-            Data = new object();
+            Data = new { };
         }
     }
 
@@ -46,7 +46,7 @@ namespace NukeCore.Extensions.Monad.Response.Models
             Data = data;
         }
 
-        public ResponseBase(TData data, IFail error): base(error)
+        public ResponseBase(TData data, IFail error) : base(error)
         {
             Data = data;
         }
