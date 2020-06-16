@@ -10,7 +10,7 @@ namespace NukeCore.Extensions.Monad.Response.Models.Base.Resolvers
 
         public ApiOk(object data)
         {
-            Data = (T) (data ?? new object());
+            Data = (T) (data ?? new { });
             IsSuccess = true;
         }
     }
